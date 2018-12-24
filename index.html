@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>善融微信粉丝专享</title>
+<meta name="viewport" content="width=375,minimum-scale=0.5, maximum-scale=1.5, user-scalable=0" />
+<!--网站开启对web app程序支持-->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta http-equiv="cleartype" content="on">
+<meta name="format-detection" content="telephone=no"/>
+<link rel="stylesheet" href="css/index.css">
+<script src="js/jquery-1.10.1.min.js"></script>
+</head>
+<body>
+	<div class="page">
+        <div class="pa ruleBtn">活动规则</div>
+        <div class="banner">
+            <img width="100%" src="img/top.jpg" alt="">
+            <img class="pa logo" src="img/logo.png" alt="">
+        </div>
+        <div class="formBox">
+            <p><img class="icon" src="img/icon1.png" alt=""><span>报名时间：</span>2018/10/12 10:00:00 - 2018/10/16 23:59:59</p>
+            <p><img class="icon" src="img/icon2.png" alt=""><span>活动时间：</span>2018/10/18 10:00:00 - 2018/10/18 19:59:59</p>
+            <input type="text" id="phone" class="form-control" placeholder="请输入参与善融抢购的手机号码">
+            <div class="btn submitBtn">我要报名</div>
+            <div class="tip">*温馨提示：参加抢购的手机号须与报名手机号一致，且此手机号需在抢购开始前成功注册善融商务。</div>
+        </div>
+
+        <div class="caption"><span>本期专享商品展示</span></div>
+        <div class="part">
+            <div class="item clear">
+                <a href="">
+                    <div class="left"><img src="img/1.jpg" alt=""></div>
+                    <div class="right">荣事达电炖锅紫砂锅煮粥煲汤家用陶瓷锅全自动</div>
+                    <div class="clear prize">
+                        <div class="fl">商城价：<s>¥ 119</s></div>
+                        <div class="fl">专享价：<strong>¥ 99</strong></div>
+                    </div>
+                </a>
+            </div>
+            <div class="item clear">
+                <a href="">
+                    <div class="left"><img src="img/1.jpg" alt=""></div>
+                    <div class="right">荣事达电炖锅紫砂锅煮粥煲汤家用陶瓷锅全自动</div>
+                    <div class="clear prize">
+                        <div class="fl">商城价：<s>¥ 119</s></div>
+                        <div class="fl">专享价：<strong>¥ 99</strong></div>
+                    </div>
+                </a>
+            </div>
+            <div class="item clear">
+                <a href="">
+                    <div class="left"><img src="img/1.jpg" alt=""></div>
+                    <div class="right">荣事达电炖锅紫砂锅煮粥煲汤家用陶瓷锅全自动</div>
+                    <div class="clear prize">
+                        <div class="fl">商城价：<s>¥ 119</s></div>
+                        <div class="fl">专享价：<strong>¥ 99</strong></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <a href="" class="bottom"><img width="100%" src="img/bottom.jpg" alt=""></a>
+
+    </div>
+
+    <!--************规则*************-->
+    <div class="rule hide">
+        <div class="mask"></div>
+        <div class="dialog-box">
+            <div class="dialog_bd">
+                （1）本场活动商品，每位报名的微信用户限购一件。<br>
+                （2）用户在报名阶段提供的手机号须与参加抢购活动的手机号一致。且此手机号需在抢购开始前成功注册善融商务个人商城，因用户未及时完成注册导致无法参与抢购活动的，将不予补偿。<br>
+                （3）抢购成功以订单完成支付为准，抢购订单超过30分钟未完成支付，将取消订单。<br>
+                （4）专享优惠商品数量有限，自开放时点起，按订单完成支付时间的先后，先到先得，抢完为止。
+                <div class="btn cancel">知道了</div>
+            </div>
+        </div>
+    </div>
+    <!--************弹出框*************-->
+    <div class="dialog hide">
+        <div class="mask"></div>
+        <div class="dialog-box">
+            <div class="dialog_bd">
+                <div class="dialog_txt">12312</div>
+                <div class="btn cancel">知道了</div>
+            </div>
+        </div>
+    </div>
+    <div class="msg hide">
+        <div class="mask"></div>
+        <div class="msg-content">
+            请求失败
+        </div>
+    </div>
+    
+</body>
+</html>
+<script>
+	var h = document.documentElement.clientHeight;
+	$(function(){
+        $(".ruleBtn").click(function(){
+            $(".rule").show();
+        });
+        $(".rule .cancel").click(function(){
+            $(".rule").hide();
+        });
+        $(".dialog .cancel").click(function(){
+            $(".dialog").hide();
+        });
+
+
+        $(".submitBtn").click(function(){
+            var opt=[["#phone",/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/,"手机号码错误！"],
+                     ];
+            validate(opt,function(){
+                $.ajax({
+                    url:'',
+                    data:{},
+                    beforeSend:function(){
+                        $(".msg").show();
+                        $(".msg-content").text("提交中...");
+                    },
+                    success:function(){
+                        $(".msg-content").text("提交成功");
+                        setTimeout(function(){
+                            $(".msg").hide();
+                        },1500);
+                    },
+                    error:function(){
+                        $(".msg-content").text("提交失败");
+                        setTimeout(function(){
+                            $(".msg").hide();
+                        },1500);
+                    }
+                },"json");
+            });
+        });
+        
+	});
+
+    function validate(opt,fn) {
+        $(".errMsg").remove();
+        for(var i=0;i<opt.length;i++){
+            if(!(opt[i][1]).exec($(opt[i][0]).val()) || opt[i][0]==undefined){
+                $(".dialog_txt").text(opt[i][2]);
+                $(".dialog").show();
+                return false;
+            }
+        }
+        fn();
+    }
+</script>
